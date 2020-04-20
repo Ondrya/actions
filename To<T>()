@@ -1,0 +1,25 @@
+public static T To<T>(this string json) 
+    => JsonConvert.DeserializeObject<T>(json, JsonSettings.SerializerDefaults);
+
+//Usage:
+//var address = json.To<Address>();
+
+//Note: You may have noticed the JsonSettings.SerializerDefaults in the DeserializeObject method. I created a static JsonSettings defaults file to keep them in a centralized location.
+
+public static class JsonSettings
+{
+    static readonly DefaultContractResolver _contractResolver =
+        new DefaultContractResolver
+        {
+            NamingStrategy = new CamelCaseNamingStrategy()
+        };
+
+    internal static JsonSerializerSettings SerializerDefaults { get; } =
+        new JsonSerializerSettings
+        {
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
+            ContractResolver = _contractResolver,
+            Formatting = Formatting.Indented,
+            NullValueHandling = NullValueHandling.Ignore
+        };
+}
