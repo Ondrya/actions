@@ -1,0 +1,9 @@
+public static Image ToImage(this byte[] data)
+{
+    var ic = new ImageConverter();
+    var img = (Image)ic.ConvertFrom(data);
+    return img;
+}
+
+//Usage:
+//var image = byteArray.ToImage();
