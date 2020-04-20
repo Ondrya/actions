@@ -1,0 +1,30 @@
+public static class ResourceExtensions
+{
+    public static Dictionary<string, object> GetResources(this ResourceManager manager, string culture="")
+    {
+        culture = String.IsNullOrEmpty(culture) ? "en" : culture;
+        var resources = manager.GetResourceSet(new System.Globalization.CultureInfo(culture), true, true);
+
+        var resourceStringList = new List<string>();
+        var iterator = resources.GetEnumerator();
+        while (iterator.MoveNext()) resourceStringList.Add(iterator.Key.ToString());
+
+        return resourceStringList.ToDictionary(s => s, manager.GetItem);
+    }
+
+    private static object GetItem(this ResourceManager manager, string resource)
+    {
+        return manager.GetObject(resource);
+    }
+}
+
+//Usage:
+//var resourceManager = new ResourceManager("DefaultData", Assembly.GetExecutingAssembly() );
+//var resourceList = resourceManager.GetResources();
+
+//I use Resource Files a lot for internationalization, 
+//database seeding (https://www.danylkoweb.com/Blog/quick-tip-seeding-large-data-in-entity-framework-core-21-OE), and 
+//database mocking (https://www.danylkoweb.com/Blog/the-fastest-way-to-mock-a-database-for-unit-testing-B6).
+//Why not just immediately pull the resources and save them for later?
+//GetResources() returns back a dictionary of the string names with their contents. Use the dictionary key to access the resource.
+
