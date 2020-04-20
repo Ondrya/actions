@@ -13,3 +13,4 @@ public static class HttpContextExtensions
 
 //usage
 //var host = HttpContext.Current.GetDomain();
+//This little gem extends the HttpContextBase and HttpContext to provide the domain name of your site.
