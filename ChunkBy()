@@ -1,0 +1,20 @@
+public static class ListExtensions
+{
+    public static List<List<T>> ChunkBy<T>(this List<T> source, int chunkSize) 
+    {
+        return source
+            .Select((x, i) => new { Index = i, Value = x })
+            .GroupBy(x => x.Index / chunkSize)
+            .Select(x => x.Select(v => v.Value).ToList())
+            .ToList();
+    }
+}
+
+//Usage:
+//var newList = products.ChunkBy(10);
+
+/*
+For this particular extension, I needed to breakdown a list into smaller lists, so I needed 5 lists of 10 items.
+Instead of using a for..next loop, I attached an extension method to a List and passed in the grouping size.
+Consider it like a paging function for lists and arrays.
+*/
