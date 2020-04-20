@@ -1,0 +1,15 @@
+public static class HttpContextExtensions
+{
+    public static string GetDomain(this HttpContext context)
+    {
+        return context.Request.Url.GetLeftPart(UriPartial.Authority);
+    }
+
+    public static string GetDomain(this HttpContextBase context)
+    {
+        return context.Request.Url.GetLeftPart(UriPartial.Authority);
+    }
+}
+
+//usage
+//var host = HttpContext.Current.GetDomain();
