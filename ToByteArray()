@@ -1,0 +1,11 @@
+public static byte[] ToByteArray(this Image imageIn)
+{
+    var ms = new MemoryStream();
+    imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+    return ms.ToArray();
+}
+
+//Usage
+//var bytes = image.ToByteArray();
+
+//Looking to convert an image into a bytearray to store in a database (https://www.danylkoweb.com/Blog/aspnet-mvc-uploading-files-C3)?
