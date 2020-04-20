@@ -1,0 +1,19 @@
+public static DateTime[] GetDatesArray(this DateTime fromDate, DateTime toDate)
+{
+    int days = (toDate - fromDate).Days;
+    var dates = new DateTime[days];
+
+    for (int i = 0; i < days; i++)
+    {
+        dates[i] = fromDate.AddDays(i);
+    }
+
+    return dates;
+}
+
+//Usage:
+//var startDate = new DateTime(2019,12,15);
+//var endDate = new DateTime(2019,12,25);
+//var dates = startDate.GetDatesArray(endDate);
+
+//This extension method takes a start and end date and returns a list of those dates in an array.
