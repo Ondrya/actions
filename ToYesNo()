@@ -1,0 +1,16 @@
+public static class BoolExtensions
+{
+    public static MvcHtmlString ToYesNo(this bool value)
+    {
+        const string text = "<div class=\"text-center\">{0}</div>";
+        return value
+            ? MvcHtmlString.Create(String.Format(text, "Yes"))
+            : MvcHtmlString.Create(String.Format(text, "No"));
+    }
+}
+
+//Usage:
+//@Html.Raw(model.Enabled.ToYesNo())
+
+//Yes, I know what you're thinking. Why create an extension method displaying a Yes/No when you can easily create a simple ternary expression in your HTML? (i.e. product.IsEnabled ? "Yes" : "No")
+//Because I like to keep the HTML clean with no "business logic" in my presentation layer.
