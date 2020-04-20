@@ -1,0 +1,5 @@
+public static string ToJson<T>(this T instance) 
+    => JsonConvert.SerializeObject(instance, JsonSettings.SerializerDefaults);
+
+//Usage:
+//var json = address.ToJson();
